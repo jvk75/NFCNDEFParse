@@ -1,9 +1,13 @@
 # NFCNDEFParse
 
 NFC Forum Well Known Type Data Parser for iOS11 and Core NFC.
+
 Supports parsing of types:
+
 Text - NFCForum-TS-RTD_Text_1.0 2006-07-24
+
 Uri - NFCForum-TS-RTD_URI_1.0 2006-07-24
+
 Smart Poster - NFCForum-SmartPoster_RTD_1.0 2006-07-24 (TBA)
 
 ## Requirements
