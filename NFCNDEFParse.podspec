@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NFCNDEFParse'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'NFC Forum Well Known Type Data Parser for iOS11 and Core NFC'
 
 # This description is used to generate tags and improve search results.
@@ -18,13 +18,11 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-
 NFC Forum Well Known Type Data Parser for iOS11 and Core NFC.
 Supports parsing of types:
 Text - NFCForum-TS-RTD_Text_1.0 2006-07-24
 Uri - NFCForum-TS-RTD_URI_1.0 2006-07-24
 Smart Poster - NFCForum-SmartPoster_RTD_1.0 2006-07-24
-
 DESC
 
   s.homepage         = 'https://github.com/jvk75/NFCNDEFParse'
