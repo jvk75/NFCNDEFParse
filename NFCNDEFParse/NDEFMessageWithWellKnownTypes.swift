@@ -12,7 +12,7 @@ import CoreNFC
 /// - text
 /// - uri
 /// - smart poster (coming soon)
-enum NFCForumWellKnownType: String {
+public enum NFCForumWellKnownType: String {
     case text = "T"
     case uri = "U"
     case smartPoster = "Sp"
@@ -34,7 +34,7 @@ public class NDEFMessageWithWellKnownTypes {
 
     /// - records : [NFCForumWellKnownTypeProtocol]
     ///   - collection of the NFCForumWellKnownTypes
-    var records: [NFCForumWellKnownTypeProtocol] = []
+    public var records: [NFCForumWellKnownTypeProtocol] = []
 
     public init?(records: [NFCNDEFPayload]) {
         self.records = records.flatMap({ record in

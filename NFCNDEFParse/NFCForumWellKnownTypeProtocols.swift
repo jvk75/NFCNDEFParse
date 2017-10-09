@@ -9,20 +9,20 @@ import Foundation
 import CoreNFC
 
 /// - type : NFCForumWellKnownType
-protocol NFCForumWellKnownTypeProtocol {
+public protocol NFCForumWellKnownTypeProtocol {
     var type: NFCForumWellKnownType {get}
 }
 
 /// - string : String
 /// - locale : String
-protocol NFCForumWellKnownTypeTextProtocol: NFCForumWellKnownTypeProtocol {
+public protocol NFCForumWellKnownTypeTextProtocol: NFCForumWellKnownTypeProtocol {
     var string: String? {get}
     var locale: String? {get}
 }
 
 /// - url : URL
 /// - locale : String
-protocol NFCForumWellKnownTypeUriProtocol: NFCForumWellKnownTypeProtocol {
+public protocol NFCForumWellKnownTypeUriProtocol: NFCForumWellKnownTypeProtocol {
     var url: URL? {get}
     var string: String? {get}
 }

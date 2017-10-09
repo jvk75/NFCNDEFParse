@@ -13,17 +13,17 @@ import CoreNFC
 ///   - string representation of the payload
 /// - locale : String
 ///   - language code of the payload string
-class NFCForumWellKnownTypeText: NFCForumWellKnownTypeTextProtocol {
+public class NFCForumWellKnownTypeText: NFCForumWellKnownTypeTextProtocol {
     
-    var type: NFCForumWellKnownType = .text
+    public var type: NFCForumWellKnownType = .text
     
-    var string: String?
-    var locale: String?
+    public var string: String?
+    public var locale: String?
     
     private var localeLength: Int = 0
     private var encoding: String.Encoding = .utf8
     
-    init?(payload: Data) {
+    public init?(payload: Data) {
         let bytes = [UInt8](payload)
         let statusByte = bytes[0]
         parseStatusByte(byte: statusByte)
@@ -33,7 +33,7 @@ class NFCForumWellKnownTypeText: NFCForumWellKnownTypeTextProtocol {
         string = String(bytes: textBytes, encoding: encoding)
     }
     
-    func parseStatusByte(byte: UInt8) {
+    private func parseStatusByte(byte: UInt8) {
         let binary = String(byte, radix: 2).characters
         if binary.count == 8, binary.first! == "1" {
             encoding = .utf16

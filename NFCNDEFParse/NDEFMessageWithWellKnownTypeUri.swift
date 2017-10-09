@@ -13,14 +13,14 @@ import CoreNFC
 ///   - not nil if payload can be created as URL type
 /// - string : String (
 ///   - string representation of the payload
-class NFCForumWellKnownTypeUri: NFCForumWellKnownTypeUriProtocol {
+public class NFCForumWellKnownTypeUri: NFCForumWellKnownTypeUriProtocol {
     
-    var type: NFCForumWellKnownType = .uri
+    public var type: NFCForumWellKnownType = .uri
     
-    var url: URL?
-    var string: String?
+    public var url: URL?
+    public var string: String?
     
-    init?(payload: Data) {
+    public init?(payload: Data) {
         let bytes = [UInt8](payload)
         let uriIdentifierByte = bytes[0]
         let textBytes = bytes[1...]

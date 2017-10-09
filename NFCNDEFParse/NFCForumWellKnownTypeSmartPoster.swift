@@ -11,13 +11,13 @@ import CoreNFC
 /// NFCForum-SmartPoster_RTD_1.0 2006-07-24
 /// - records : [NFCForumWellKnownTypeProtocol]
 ///   - collection of the NFCForumWellKnownTypes
-class NFCForumWellKnownTypeSmartPoster: NFCForumWellKnownTypeProtocol {
+public class NFCForumWellKnownTypeSmartPoster: NFCForumWellKnownTypeProtocol {
     
-    var type: NFCForumWellKnownType = .smartPoster
+    public var type: NFCForumWellKnownType = .smartPoster
     
-    var records: [NFCForumWellKnownTypeProtocol] = []
+    public var records: [NFCForumWellKnownTypeProtocol] = []
     
-    init?(payload: Data) {
+    public init?(payload: Data) {
         //TBA
     }
 }
