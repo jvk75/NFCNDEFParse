@@ -7,12 +7,11 @@
 
 import Foundation
 import CoreNFC
-import UIKit
 
 /// Currently supported types
 /// - text
 /// - uri
-/// - smart poster
+/// - smart poster (coming soon)
 enum NFCForumWellKnownType: String {
     case text = "T"
     case uri = "U"
@@ -31,13 +30,13 @@ enum NFCForumWellKnownType: String {
 /// Class that contains records of NFC Forum Well Known Types
 /// - records : [NFCForumWellKnownTypeProtocol]
 ///   - collection of the NFCForumWellKnownTypes
-class NDEFMessageWithWellKnownTypes {
+public class NDEFMessageWithWellKnownTypes {
 
     /// - records : [NFCForumWellKnownTypeProtocol]
     ///   - collection of the NFCForumWellKnownTypes
     var records: [NFCForumWellKnownTypeProtocol] = []
 
-    init?(records: [NFCNDEFPayload]) {
+    public init?(records: [NFCNDEFPayload]) {
         self.records = records.flatMap({ record in
             let type = NFCForumWellKnownType(data: record.type)
             switch type {
@@ -50,5 +49,4 @@ class NDEFMessageWithWellKnownTypes {
             }
         })
     }
-
 }

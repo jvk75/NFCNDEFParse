@@ -18,6 +18,6 @@ class NFCForumWellKnownTypeSmartPoster: NFCForumWellKnownTypeProtocol {
     var records: [NFCForumWellKnownTypeProtocol] = []
     
     init?(payload: Data) {
-        
+        //TBA
     }
 }
