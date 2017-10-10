@@ -21,24 +21,30 @@ pod 'NFCNDEFParse'
 
 ## Usage
 
+Import the library.
+
 ```
 import NFCNDEFParse
+```
 
-...
+Create array for the messages
 
-var data: NDEFMessageWithWellKnownTypes?
+```
+var data: [NDEFMessageWithWellKnownTypes] = []
+```
 
-...
+In CoreNFC callback create the "well know types" data array.
 
+```
 func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
-    for message in messages {
-        data = NDEFMessageWithWellKnownTypes(records: message.records)
-    }
+    data = messages.flatMap({ NDEFMessageWithWellKnownTypes(records: $0.records) })
 }
+```
 
-...
+Loop through the data array to print out the values.
 
-data?.records.forEach({ record in
+```
+data.records.forEach({ record in
     if record.type == .text, let record = record as? NFCForumWellKnownTypeTextProtocol {
         print(record.string)
         print(record.locale)
