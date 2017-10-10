@@ -1,5 +1,6 @@
 //
 //  NDEFMessageWithWellKnownTypes.swift
+//  NFCNDEFParse
 //
 //  Created by Jari Kalinainen on 09/10/2017.
 //
@@ -11,7 +12,7 @@ import CoreNFC
 /// Currently supported types
 /// - text
 /// - uri
-/// - smart poster (coming soon)
+/// - smart poster (title, uri)
 public enum NFCForumWellKnownType: String {
     case text = "T"
     case uri = "U"
@@ -33,14 +34,16 @@ public enum NFCForumWellKnownType: String {
 /// Class that contains records of NFC Forum Well Known Types
 /// - records : [NFCForumWellKnownTypeProtocol]
 ///   - collection of the NFCForumWellKnownTypes
+/// - types : [NFCForumWellKnownTypeProtocol]
+///   - collection of the record types
 public class NDEFMessageWithWellKnownTypes {
 
-    /// - records : [NFCForumWellKnownTypeProtocol]
-    ///   - collection of the NFCForumWellKnownTypes
     public var records: [NFCForumWellKnownTypeProtocol] = []
-
+    public var types: [NFCTypeNameFormat] = []
+    
     public init?(records: [NFCNDEFPayload]) {
         self.records = records.flatMap({ record in
+            self.types.append(record.typeNameFormat)
             let type = NFCForumWellKnownType(data: record.type)
             switch type {
             case .text:
