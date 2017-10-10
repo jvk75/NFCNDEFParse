@@ -19,7 +19,11 @@ public class NFCForumWellKnownTypeUri: NFCForumWellKnownTypeUriProtocol {
     
     public var url: URL?
     public var string: String?
-    
+
+    public var description: String {
+        return "- \(self.type): \n\tstring: \(string ?? "%EMPTY%") \n\turl: \(url?.absoluteString ?? "%EMPTY%")"
+    }
+
     public init?(payload: Data) {
         let bytes = [UInt8](payload)
         let uriIdentifierByte = bytes[0]

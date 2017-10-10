@@ -16,6 +16,9 @@ public enum NFCForumWellKnownType: String {
     case text = "T"
     case uri = "U"
     case smartPoster = "Sp"
+    case action = "act" // smart poster sub type
+    case size = "s" // smart poster sub type
+    case type = "t" // smart poster sub type
     case unknown
 
     init(data: Data) {
@@ -44,6 +47,8 @@ public class NDEFMessageWithWellKnownTypes {
                 return NFCForumWellKnownTypeText(payload: record.payload)
             case .uri:
                 return NFCForumWellKnownTypeUri(payload: record.payload)
+            case .smartPoster:
+                return NFCForumWellKnownTypeSmartPoster(payload: record.payload)
             default:
                 return nil
             }

@@ -8,7 +8,7 @@ Text - NFCForum-TS-RTD_Text_1.0 2006-07-24
 
 Uri - NFCForum-TS-RTD_URI_1.0 2006-07-24
 
-Smart Poster - NFCForum-SmartPoster_RTD_1.0 2006-07-24 (TBA)
+Smart Poster - NFCForum-SmartPoster_RTD_1.0 2006-07-24 (with some limitations)
 
 ## Requirements
 
@@ -48,15 +48,11 @@ func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NF
 Loop through the data array to print out the values.
 
 ```
-data.records.forEach({ record in
-    if record.type == .text, let record = record as? NFCForumWellKnownTypeTextProtocol {
-        print(record.string)
-        print(record.locale)
-    }
-    if record.type == .uri, let record = record as? NFCForumWellKnownTypeUriProtocol {
-        print(record.string)
-        print(record.url)
-    }
+data.forEach({ message in
+    print("message: ")
+    message.records.forEach({ record in
+        print(record.description)
+    })
 })
 
 ```

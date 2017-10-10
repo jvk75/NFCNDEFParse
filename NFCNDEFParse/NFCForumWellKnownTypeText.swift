@@ -19,7 +19,11 @@ public class NFCForumWellKnownTypeText: NFCForumWellKnownTypeTextProtocol {
     
     public var string: String?
     public var locale: String?
-    
+
+    public var description: String {
+        return "- \(self.type): \n\tstring: \(string ?? "%EMPTY%") \n\tlocale: \(locale ?? "%EMPTY%")"
+    }
+
     private var localeLength: Int = 0
     private var encoding: String.Encoding = .utf8
     
