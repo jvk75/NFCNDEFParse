@@ -8,7 +8,7 @@ Text - NFCForum-TS-RTD_Text_1.0 2006-07-24
 
 Uri - NFCForum-TS-RTD_URI_1.0 2006-07-24
 
-Smart Poster - NFCForum-SmartPoster_RTD_1.0 2006-07-24 (with some limitations)
+Smart Poster - NFCForum-SmartPoster_RTD_1.0 2006-07-24 (title, uri, action, size)
 
 ## Requirements
 

@@ -9,9 +9,9 @@ import Foundation
 import CoreNFC
 
 /// NFCForum-TS-RTD_URI_1.0 2006-07-24
-/// - url : URL
+/// - **url** : URL
 ///   - not nil if payload can be created as URL type
-/// - string : String (
+/// - **string** : String (
 ///   - string representation of the payload
 public class NFCForumWellKnownTypeUri: NFCForumWellKnownTypeUriProtocol {
     

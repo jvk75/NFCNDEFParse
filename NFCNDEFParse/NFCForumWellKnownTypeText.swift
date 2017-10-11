@@ -9,9 +9,9 @@ import Foundation
 import CoreNFC
 
 /// NFCForum-TS-RTD_Text_1.0 2006-07-24
-/// - string : String
+/// - **string** : String
 ///   - string representation of the payload
-/// - locale : String
+/// - **locale** : String
 ///   - language code of the payload string
 public class NFCForumWellKnownTypeText: NFCForumWellKnownTypeTextProtocol {
     

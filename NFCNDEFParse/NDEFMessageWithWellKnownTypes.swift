@@ -12,7 +12,7 @@ import CoreNFC
 /// Currently supported types
 /// - text
 /// - uri
-/// - smart poster (title, uri)
+/// - smart poster (title, uri, action, size)
 public enum NFCForumWellKnownType: String {
     case text = "T"
     case uri = "U"
@@ -32,9 +32,9 @@ public enum NFCForumWellKnownType: String {
 }
 
 /// Class that contains records of NFC Forum Well Known Types
-/// - records : [NFCForumWellKnownTypeProtocol]
+/// - **records** : [NFCForumWellKnownTypeProtocol]
 ///   - collection of the NFCForumWellKnownTypes
-/// - types : [NFCForumWellKnownTypeProtocol]
+/// - **types** : [NFCTypeNameFormat]
 ///   - collection of the record types
 public class NDEFMessageWithWellKnownTypes {
 
