@@ -12,7 +12,7 @@ Smart Poster - NFCForum-SmartPoster_RTD_1.0 2006-07-24 (title, uri, action, size
 
 ## Requirements
 
-Core NFC requires iOS11
+Core NFC requires iOS11 (and Xcode 9)
 
 ## Installation
 
@@ -25,19 +25,27 @@ pod 'NFCNDEFParse'
 
 ## Usage
 
-Import the library.
+### Import the library.
+
+Swift:
 
 ```
 import NFCNDEFParse
 ```
 
-Create array for the messages
+Objective-C:
+
+```
+@import NFCNDEFParse;
+```
+
+### Create array for the messages
 
 ```
 var data: [NDEFMessageWithWellKnownTypes] = []
 ```
 
-In CoreNFC callback create the "well know types" data array.
+### In CoreNFC callback create the "well know types" data array.
 
 ```
 func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
@@ -45,7 +53,7 @@ func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NF
 }
 ```
 
-Loop through the data array to print out the values.
+### Loop through the data array to print out the values.
 
 ```
 data.forEach({ message in

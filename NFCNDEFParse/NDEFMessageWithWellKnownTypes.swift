@@ -13,20 +13,54 @@ import CoreNFC
 /// - text
 /// - uri
 /// - smart poster (title, uri, action, size)
-public enum NFCForumWellKnownType: String {
-    case text = "T"
-    case uri = "U"
-    case smartPoster = "Sp"
-    case action = "act" // smart poster sub type
-    case size = "s" // smart poster sub type
-    case type = "t" // smart poster sub type
+@objc public enum NFCForumWellKnownTypeEnum: Int {
+    case text //"T"
+    case uri //"U"
+    case smartPoster //"Sp"
+    case action //"act" // smart poster sub type
+    case size //"s" // smart poster sub type
+    case type //"t" // smart poster sub type
     case unknown
 
     init(data: Data) {
         if let string = String(data: data, encoding: .utf8) {
-            self = NFCForumWellKnownType(rawValue: string) ?? .unknown
+            switch string {
+            case "T":
+                self = .text
+            case "U":
+                self = .uri
+            case "Sp":
+                self = .smartPoster
+            case "act":
+                self = .action
+            case "s":
+                self = .size
+            case "t":
+                self = .type
+            default:
+                self = .unknown
+            }
         } else {
             self = .unknown
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .text:
+            return "Text"
+        case .uri:
+            return "Uri"
+        case .smartPoster:
+            return "Smart Poster"
+        case .action:
+            return "Action"
+        case .size:
+            return "Size"
+        case .type:
+            return "Type"
+        default:
+            return "Unknown"
         }
     }
 }
@@ -36,15 +70,16 @@ public enum NFCForumWellKnownType: String {
 ///   - collection of the NFCForumWellKnownTypes
 /// - **types** : [NFCTypeNameFormat]
 ///   - collection of the record types
-public class NDEFMessageWithWellKnownTypes {
+@objc public class NDEFMessageWithWellKnownTypes: NSObject  {
 
-    public var records: [NFCForumWellKnownTypeProtocol] = []
-    public var types: [NFCTypeNameFormat] = []
+    @objc public var records: [NFCForumWellKnownTypeProtocol] = []
+    @objc public var types: [UInt8] = []
     
     public init?(records: [NFCNDEFPayload]) {
+        super.init()
         self.records = records.flatMap({ record in
-            self.types.append(record.typeNameFormat)
-            let type = NFCForumWellKnownType(data: record.type)
+            self.types.append(record.typeNameFormat.rawValue)
+            let type = NFCForumWellKnownTypeEnum(data: record.type)
             switch type {
             case .text:
                 return NFCForumWellKnownTypeText(payload: record.payload)
