@@ -13,20 +13,23 @@ import CoreNFC
 ///   - not nil if payload can be created as URL type
 /// - **string** : String (
 ///   - string representation of the payload
-public class NFCForumWellKnownTypeUri: NSObject, NFCForumWellKnownTypeUriProtocol {
+@objc public class NFCForumWellKnownTypeUri: NSObject, NFCForumWellKnownTypeUriProtocol {
     
-    public var type: NFCForumWellKnownType = .uri
+    @objc public var type: NFCForumWellKnownTypeEnum = .uri
     
-    public var url: URL?
-    public var string: String?
+    @objc public var url: URL?
+    @objc public var string: String?
 
-    public var recordDescription: String {
-        return "- \(self.type): \n\tstring: \(string ?? "%EMPTY%") \n\turl: \(url?.absoluteString ?? "%EMPTY%")"
+    @objc public var recordDescription: String {
+        return "- \(self.type.description): \n\tstring: \(string ?? "nil") \n\turl: \(url?.absoluteString ?? "nil")"
     }
 
     public init?(payload: Data) {
         super.init()
         let bytes = [UInt8](payload)
+        guard bytes.count > 2 else {
+            return
+        }
         let uriIdentifierByte = bytes[0]
         let textBytes = bytes[1...]
         if let textString = String(bytes: textBytes, encoding: .utf8) {

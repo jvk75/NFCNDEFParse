@@ -14,13 +14,13 @@ import CoreNFC
 ///   - collection of the NFCForumWellKnownTypes
 public class NFCForumWellKnownTypeSmartPoster: NSObject, NFCForumWellKnownTypeSmartPosterProtocol {
     
-    public var type: NFCForumWellKnownType = .smartPoster
+    public var type: NFCForumWellKnownTypeEnum = .smartPoster
     
     public var records: [NFCForumWellKnownTypeProtocol] = []
 
     public var recordDescription: String {
         let recordDescriptions = records.map({ $0.recordDescription }).joined(separator: "\n")
-        return "- \(self.type): {\n\(recordDescriptions)\n}\n"
+        return "- \(self.type.description): {\n\(recordDescriptions)\n}\n"
     }
 
     private var payloadFirstByte: Int = 0
@@ -28,12 +28,15 @@ public class NFCForumWellKnownTypeSmartPoster: NSObject, NFCForumWellKnownTypeSm
     public init?(payload: Data) {
         super.init()
         let allBytes = [UInt8](payload)
+        guard allBytes.count > 3 else {
+            return
+        }
         var newRecords: [NFCForumWellKnownTypeProtocol?] = []
         while payloadFirstByte < allBytes.count {
             let bytes = Array(allBytes[payloadFirstByte...])
 
             let typeLength = Int(bytes[1])
-            let type = NFCForumWellKnownType(data: Data(bytes: bytes[3...(2+typeLength)]))
+            let type = NFCForumWellKnownTypeEnum(data: Data(bytes: bytes[3...(2+typeLength)]))
 
             let payloadLength: Int
             switch type {
@@ -54,9 +57,9 @@ public class NFCForumWellKnownTypeSmartPoster: NSObject, NFCForumWellKnownTypeSm
             case .uri:
                 newRecords.append(NFCForumWellKnownTypeUri(payload: payload))
             case .size:
-                newRecords.append(NFCForumWellKnownTypeSize(payload: payload))
+                newRecords.append(NFCForumWellKnownSubTypeSize(payload: payload))
             case .action:
-                newRecords.append(NFCForumWellKnownTypeAction(payload: payload))
+                newRecords.append(NFCForumWellKnownSubTypeAction(payload: payload))
             default:
                 continue
             }
@@ -67,7 +70,7 @@ public class NFCForumWellKnownTypeSmartPoster: NSObject, NFCForumWellKnownTypeSm
 }
 
 // MARK: - Smart Poster Action Record Enum
-public enum NFCSmartPosterActionRecord: UInt8 {
+@objc public enum NFCSmartPosterActionRecord: UInt8 {
     case execute = 0x00
     case save = 0x01
     case open = 0x02
@@ -91,19 +94,21 @@ public enum NFCSmartPosterActionRecord: UInt8 {
 ///   - **execute** : Do the action (send the SMS, launch the browser, make the telephone call)
 ///   - **save** : Save for later (store the SMS in INBOX, put the URI in a bookmark, save the telephone number in contacts)
 ///   - **open** : Open for editing (open an SMS in the SMS editor, open the URI in an URI editor, open the telephone number for editing).
-public class NFCForumWellKnownTypeAction: NSObject, NFCForumWellKnownTypeProtocol {
+@objc public class NFCForumWellKnownSubTypeAction: NSObject, NFCForumWellKnownTypeActionProtocol, NFCForumWellKnownTypeActionProtocolObjC {
 
-    public var type: NFCForumWellKnownType = .action
+    @objc public var type: NFCForumWellKnownTypeEnum = .action
     
-    public var recordDescription: String {
-        return self.action?.description ?? "nil"
+    @objc public var recordDescription: String {
+        return "-\(type.description)\naction: " + (self.action?.description ?? "nil")
     }
     
     public var action: NFCSmartPosterActionRecord?
-    
+    @objc public var actionByte: UInt8 = 0xFF
+
     public init?(payload: Data) {
         super.init()
         let bytes = [UInt8](payload)
+        self.actionByte = bytes[0]
         if let byte = bytes.first {
             self.action = NFCSmartPosterActionRecord(rawValue: byte)
         }
@@ -115,18 +120,15 @@ public class NFCForumWellKnownTypeAction: NSObject, NFCForumWellKnownTypeProtoco
 /// Smart Poster Size Record
 /// - **size** : Int
 ///   - value of the size payload
-public class NFCForumWellKnownTypeSize: NSObject, NFCForumWellKnownTypeProtocol {
+public class NFCForumWellKnownSubTypeSize: NSObject, NFCForumWellKnownTypeSizeProtocol {
     
-    public var type: NFCForumWellKnownType = .action
+    public var type: NFCForumWellKnownTypeEnum = .action
     
     public var recordDescription: String {
-        if let size = self.size {
-            return "\(size)"
-        }
-        return "nil"
+        return "-\(type.description)\nsize: \(size)"
     }
     
-    public var size: Int?
+    public var size: Int = 0
     
     public init?(payload: Data) {
         super.init()
