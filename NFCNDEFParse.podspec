@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NFCNDEFParse'
-  s.version          = '0.2.1'
+  s.version          = '0.3.0'
   s.summary          = 'NFC Forum Well Known Type Data Parser for iOS11 and Core NFC'
 
 # This description is used to generate tags and improve search results.

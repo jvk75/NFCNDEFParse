@@ -8,7 +8,7 @@
 import Foundation
 import CoreNFC
 
-/// - **type** : NFCForumWellKnownType
+/// - **type** : NFCForumWellKnownTypeEnum
 /// - **description** : String
 ///   - record description (values)
 @objc public protocol NFCForumWellKnownTypeProtocol {
@@ -41,7 +41,7 @@ import CoreNFC
     var size: Int {get}
 }
 
-/// - **action**: NFCSmartPosterActionRecord
+/// - **action**: NFCSmartPosterActionRecord / **actionByte**: UInt8 (for ObjC)
 ///   - **execute** : Do the action (send the SMS, launch the browser, make the telephone call)
 ///   - **save** : Save for later (store the SMS in INBOX, put the URI in a bookmark, save the telephone number in contacts)
 ///   - **open** : Open for editing (open an SMS in the SMS editor, open the URI in an URI editor, open the telephone number for editing).
