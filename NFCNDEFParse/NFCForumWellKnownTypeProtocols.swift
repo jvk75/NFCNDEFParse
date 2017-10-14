@@ -13,7 +13,7 @@ import CoreNFC
 ///   - record description (values)
 public protocol NFCForumWellKnownTypeProtocol {
     var type: NFCForumWellKnownType {get}
-    var description: String {get}
+    var recordDescription: String {get}
 }
 
 /// - **string** : String

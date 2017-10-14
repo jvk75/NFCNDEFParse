@@ -36,12 +36,13 @@ public enum NFCForumWellKnownType: String {
 ///   - collection of the NFCForumWellKnownTypes
 /// - **types** : [NFCTypeNameFormat]
 ///   - collection of the record types
-public class NDEFMessageWithWellKnownTypes {
+public class NDEFMessageWithWellKnownTypes: NSObject  {
 
     public var records: [NFCForumWellKnownTypeProtocol] = []
     public var types: [NFCTypeNameFormat] = []
     
     public init?(records: [NFCNDEFPayload]) {
+        super.init()
         self.records = records.flatMap({ record in
             self.types.append(record.typeNameFormat)
             let type = NFCForumWellKnownType(data: record.type)

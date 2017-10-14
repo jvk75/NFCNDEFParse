@@ -13,14 +13,14 @@ import CoreNFC
 ///   - string representation of the payload
 /// - **locale** : String
 ///   - language code of the payload string
-public class NFCForumWellKnownTypeText: NFCForumWellKnownTypeTextProtocol {
+public class NFCForumWellKnownTypeText: NSObject, NFCForumWellKnownTypeTextProtocol {
     
     public var type: NFCForumWellKnownType = .text
     
     public var string: String?
     public var locale: String?
 
-    public var description: String {
+    public var recordDescription: String {
         return "- \(self.type): \n\tstring: \(string ?? "%EMPTY%") \n\tlocale: \(locale ?? "%EMPTY%")"
     }
 
@@ -28,6 +28,7 @@ public class NFCForumWellKnownTypeText: NFCForumWellKnownTypeTextProtocol {
     private var encoding: String.Encoding = .utf8
     
     public init?(payload: Data) {
+        super.init()
         let bytes = [UInt8](payload)
         let statusByte = bytes[0]
         parseStatusByte(byte: statusByte)
