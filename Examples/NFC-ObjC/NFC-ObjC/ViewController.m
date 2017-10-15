@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "NFC_ObjC-Swift.h"
+#import "NFC_ObjC-Swift.h" //Xcode generated file, will be generated automatically during first build
 
 @interface ViewController ()
 
@@ -28,7 +28,7 @@ NFCNDEFReaderSession *nfc;
         nfc = nil;
     }
     nfc = [[NFCNDEFReaderSession alloc] initWithDelegate:self queue:nil invalidateAfterFirstRead:NO];
-    nfc.alertMessage = @"Read";
+    nfc.alertMessage = @"Ready to scan NFC tags!";
 }
 
 - (IBAction)buttonPressed:(id)sender {
@@ -39,7 +39,6 @@ NFCNDEFReaderSession *nfc;
 
 -(void)updateLabel:(NSString *)string {
     _dataLabel.text = string;
-    [self.view layoutIfNeeded];
 }
 
 // MARK - NFCNDEFReaderSessionDelegate
