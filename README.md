@@ -25,6 +25,8 @@ pod 'NFCNDEFParse'
 
 ## Usage
 
+**Note: For non CocoaPods usage and more details see Examples!**
+
 ### Import the library.
 
 Swift:
